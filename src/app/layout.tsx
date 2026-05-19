@@ -30,6 +30,8 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
         />
+        <link rel="icon" href="/Profile.webp" type="image/webp" />
+        <link rel="shortcut icon" href="/Profile.webp" />
       </head>
       <body>
         <CustomCursor />

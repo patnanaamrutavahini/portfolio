@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
+// Each letter bounces on hover; CSS handles the chrome shimmer
 const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) => {
   return (
     <motion.span
@@ -13,13 +14,21 @@ const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) =>
         whiteSpace: letter === " " ? "pre" : "normal",
         cursor: "default",
       }}
-      whileHover={{ scale: 1.3, y: -10, zIndex: 10 }}
-      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+      whileHover={{ scale: 1.35, y: -12, zIndex: 10 }}
+      transition={{ type: "spring", stiffness: 450, damping: 14 }}
     >
       {letter}
     </motion.span>
   );
 };
+
+// Word-level wrapper that forces each word into its own premium font
+const nameWords: { text: string; font: string; cls: string }[] = [
+  { text: "JAMI",  font: "'Unbounded', sans-serif",        cls: "wordJami"  },
+  { text: "ESWAR", font: "'Syne', sans-serif",              cls: "wordEswar" },
+  { text: "ANIL",  font: "'Plus Jakarta Sans', sans-serif", cls: "wordAnil"  },
+  { text: "KUMAR", font: "'Outfit', sans-serif",            cls: "wordKumar" },
+];
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -146,14 +155,34 @@ export default function HeroSection() {
         </motion.p>
         
         <div className={styles.nameGlow}>
-          <motion.h1 
-            className={styles.title} 
+          <motion.h1
+            className={styles.title}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {nameArray.map((letter, index) => (
-              <HoverLetter key={index} letter={letter} variants={letterVariants} />
+            {nameWords.map((word, wi) => (
+              <span
+                key={wi}
+                className={styles.wordGroup}
+                style={{ fontFamily: word.font }}
+              >
+                {word.text.split("").map((letter, li) => (
+                  <HoverLetter
+                    key={li}
+                    letter={letter}
+                    variants={letterVariants}
+                  />
+                ))}
+                {wi < nameWords.length - 1 && (
+                  <motion.span
+                    variants={letterVariants}
+                    style={{ display: "inline-block", whiteSpace: "pre" }}
+                  >
+                    {" "}
+                  </motion.span>
+                )}
+              </span>
             ))}
           </motion.h1>
         </div>
@@ -183,12 +212,14 @@ export default function HeroSection() {
           animate="visible"
         >
           <motion.button 
-            className={styles.primaryBtn} 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={styles.primaryBtn}
+            whileTap={{ scale: 0.96 }}
             onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Discover more
+            <span className={styles.primaryBtnInner}>
+              Discover More
+              <i className="fa-solid fa-arrow-down" style={{ fontSize: "0.85em" }} />
+            </span>
           </motion.button>
           <motion.a 
             className={styles.outlineBtn} 
