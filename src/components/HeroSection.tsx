@@ -9,10 +9,9 @@ const HoverLetter = ({ letter, index, variants }: { letter: string; index: numbe
   const fonts = [
     "'Unbounded', sans-serif",
     "'Syne', sans-serif",
-    "'Cinzel', serif",
-    "'Playfair Display', serif",
     "'Space Grotesk', sans-serif",
-    "'Orbitron', sans-serif"
+    "'Outfit', sans-serif",
+    "'Plus Jakarta Sans', sans-serif"
   ];
 
   const [color, setColor] = useState<string>("transparent");
@@ -80,16 +79,19 @@ export default function HeroSection() {
   }, [mouseX, mouseY]);
 
   const welcomes = [
-    { text: "Hello", lang: "English" },
     { text: "Namaste", lang: "Hindi" },
-    { text: "Hola", lang: "Spanish" },
-    { text: "Bonjour", lang: "French" },
-    { text: "Ciao", lang: "Italian" },
-    { text: "Konnichiwa", lang: "Japanese" },
-    { text: "Guten Tag", lang: "German" },
+    { text: "Namaskaram", lang: "Telugu" },
     { text: "Vanakkam", lang: "Tamil" },
-    { text: "Nǐ Hǎo", lang: "Chinese" },
-    { text: "Annyeong", lang: "Korean" }
+    { text: "Nômōskar", lang: "Bengali" },
+    { text: "Namaskar", lang: "Marathi" },
+    { text: "Namaskara", lang: "Kannada" },
+    { text: "Namaskaram", lang: "Malayalam" },
+    { text: "Kem Chho", lang: "Gujarati" },
+    { text: "Sat Sri Akal", lang: "Punjabi" },
+    { text: "Namaskar", lang: "Odia" },
+    { text: "Namaskar", lang: "Assamese" },
+    { text: "Namo Namah", lang: "Sanskrit" },
+    { text: "Adaab", lang: "Urdu" }
   ];
 
   const [welcomeIndex, setWelcomeIndex] = useState(0);
