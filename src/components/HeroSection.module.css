@@ -56,14 +56,40 @@
   align-items: center;
 }
 
-.eyebrow {
+.welcomeWrapper {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.welcomeText {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
   color: var(--accent-cyan);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(89, 229, 255, 0.3);
+  display: flex;
+  align-items: center;
+}
+
+.langLabel {
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-left: 0.5rem;
+}
+
+.eyebrow {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  text-shadow: 0 0 10px rgba(89, 229, 255, 0.5);
 }
 
 .title {

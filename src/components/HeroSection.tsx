@@ -2,16 +2,30 @@
 
 import { useRef, useEffect, useState } from "react";
 import styles from "./HeroSection.module.css";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) => {
+const HoverLetter = ({ letter, index, variants }: { letter: string; index: number; variants: any }) => {
   const colors = ["#5fdbff", "#b76bf0", "#ff60c4", "#3784ff", "#ffbd59", "#50e3c2"];
+  const fonts = [
+    "'Unbounded', sans-serif",
+    "'Syne', sans-serif",
+    "'Cinzel', serif",
+    "'Playfair Display', serif",
+    "'Space Grotesk', sans-serif",
+    "'Orbitron', sans-serif"
+  ];
+
   const [color, setColor] = useState<string>("transparent");
+  const [fontFamily, setFontFamily] = useState<string>(fonts[index % fonts.length]);
 
   const handleMouseEnter = () => {
     const availableColors = colors.filter(c => c !== color);
     const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
     setColor(randomColor);
+
+    const availableFonts = fonts.filter(f => f !== fontFamily);
+    const randomFont = availableFonts[Math.floor(Math.random() * availableFonts.length)];
+    setFontFamily(randomFont);
   };
 
   return (
@@ -21,15 +35,16 @@ const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) =>
         display: "inline-block",
         whiteSpace: letter === " " ? "pre" : "normal",
         cursor: "default",
+        fontFamily: fontFamily,
         backgroundImage: color !== "transparent" ? "none" : undefined,
         WebkitBackgroundClip: color !== "transparent" ? "unset" : undefined,
         backgroundClip: color !== "transparent" ? "unset" : undefined,
         WebkitTextFillColor: color !== "transparent" ? color : undefined,
         color: color !== "transparent" ? color : undefined,
-        transition: "color 0.1s ease, WebkitTextFillColor 0.1s ease",
+        transition: "color 0.1s ease, WebkitTextFillColor 0.1s ease, font-family 0.1s ease",
       }}
       onMouseEnter={handleMouseEnter}
-      whileHover={{ scale: 1.2, y: -8 }}
+      whileHover={{ scale: 1.25, y: -8 }}
     >
       {letter}
     </motion.span>
@@ -64,6 +79,28 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
+  const welcomes = [
+    { text: "Hello", lang: "English" },
+    { text: "Namaste", lang: "Hindi" },
+    { text: "Hola", lang: "Spanish" },
+    { text: "Bonjour", lang: "French" },
+    { text: "Ciao", lang: "Italian" },
+    { text: "Konnichiwa", lang: "Japanese" },
+    { text: "Guten Tag", lang: "German" },
+    { text: "Vanakkam", lang: "Tamil" },
+    { text: "Nǐ Hǎo", lang: "Chinese" },
+    { text: "Annyeong", lang: "Korean" }
+  ];
+
+  const [welcomeIndex, setWelcomeIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWelcomeIndex((prev) => (prev + 1) % welcomes.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   const name = "JAMI ESWAR ANIL KUMAR";
   const nameArray = name.split("");
 
@@ -72,7 +109,7 @@ export default function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
         delayChildren: 0.2,
       }
     }
@@ -111,6 +148,21 @@ export default function HeroSection() {
         className={styles.content} 
         style={{ opacity: opacityText, scale: scaleText }}
       >
+        <div className={styles.welcomeWrapper}>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={welcomeIndex}
+              className={styles.welcomeText}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              {welcomes[welcomeIndex].text} <span className={styles.langLabel}>({welcomes[welcomeIndex].lang})</span>
+            </motion.span>
+          </AnimatePresence>
+        </div>
+
         <motion.p 
           className={styles.eyebrow}
           initial={{ opacity: 0, y: -20 }}
@@ -127,7 +179,7 @@ export default function HeroSection() {
           animate="visible"
         >
           {nameArray.map((letter, index) => (
-            <HoverLetter key={index} letter={letter} variants={letterVariants} />
+            <HoverLetter key={index} index={index} letter={letter} variants={letterVariants} />
           ))}
         </motion.h1>
         
