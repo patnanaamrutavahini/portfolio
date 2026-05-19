@@ -1,8 +1,40 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+
+const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) => {
+  const colors = ["#5fdbff", "#b76bf0", "#ff60c4", "#3784ff", "#ffbd59", "#50e3c2"];
+  const [color, setColor] = useState<string>("transparent");
+
+  const handleMouseEnter = () => {
+    const availableColors = colors.filter(c => c !== color);
+    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+    setColor(randomColor);
+  };
+
+  return (
+    <motion.span
+      variants={variants}
+      style={{
+        display: "inline-block",
+        whiteSpace: letter === " " ? "pre" : "normal",
+        cursor: "default",
+        backgroundImage: color !== "transparent" ? "none" : undefined,
+        WebkitBackgroundClip: color !== "transparent" ? "unset" : undefined,
+        backgroundClip: color !== "transparent" ? "unset" : undefined,
+        WebkitTextFillColor: color !== "transparent" ? color : undefined,
+        color: color !== "transparent" ? color : undefined,
+        transition: "color 0.1s ease, WebkitTextFillColor 0.1s ease",
+      }}
+      onMouseEnter={handleMouseEnter}
+      whileHover={{ scale: 1.2, y: -8 }}
+    >
+      {letter}
+    </motion.span>
+  );
+};
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -95,13 +127,7 @@ export default function HeroSection() {
           animate="visible"
         >
           {nameArray.map((letter, index) => (
-            <motion.span 
-              key={index} 
-              variants={letterVariants}
-              style={{ display: "inline-block", whiteSpace: letter === " " ? "pre" : "normal" }}
-            >
-              {letter}
-            </motion.span>
+            <HoverLetter key={index} letter={letter} variants={letterVariants} />
           ))}
         </motion.h1>
         
