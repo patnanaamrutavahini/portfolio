@@ -1,0 +1,134 @@
+.experience {
+  position: relative;
+  padding: 6rem 4.5rem;
+}
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timelineContainer {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timelineTrack {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+  transform: translateX(-50%);
+  z-index: 1;
+  border-radius: 999px;
+  box-shadow: 0 0 20px rgba(89, 229, 255, 0.5);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.timelineItem:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.timelineDot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--accent-purple);
+  border: 3px solid #000;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 15px var(--accent-purple);
+}
+
+.timelineContent {
+  width: 45%;
+  background: radial-gradient(circle at 10% -10%, rgba(95, 219, 255, 0.08), transparent 55%), rgba(6, 10, 20, 0.9);
+  padding: 2rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.dateBadge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(89, 229, 255, 0.1);
+  color: var(--accent-cyan);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(89, 229, 255, 0.2);
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.subtitle {
+  color: var(--accent-purple);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.details {
+  color: var(--text-sheen);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timelineTrack, .timelineLine {
+    left: 20px;
+  }
+  
+  .timelineDot {
+    left: 20px;
+  }
+  
+  .timelineItem, .timelineItem:nth-child(even) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .timelineContent {
+    width: calc(100% - 50px);
+    margin-left: 50px;
+  }
+}

@@ -1,0 +1,55 @@
+.card {
+  background: radial-gradient(circle at 10% -10%, rgba(95, 219, 255, 0.08), transparent 55%),
+    var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 30px 60px rgba(2, 4, 12, 0.8);
+  transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 65px rgba(2, 4, 12, 0.9);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(89, 229, 255, 0.4), rgba(183, 107, 240, 0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .glow {
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem;
+  height: 100%;
+}

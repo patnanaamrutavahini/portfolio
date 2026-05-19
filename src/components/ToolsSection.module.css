@@ -1,0 +1,111 @@
+.tools {
+  position: relative;
+  padding: 6rem 4.5rem;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .tools {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.marqueeContainer {
+  margin-top: 3rem;
+  position: relative;
+}
+
+/* Gradient fades for the edges */
+.marqueeContainer::before,
+.marqueeContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marqueeContainer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.marqueeContainer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+
+.marqueeWrapper {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 1.5rem;
+}
+
+.track {
+  display: flex;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  animation: scroll 30s linear infinite;
+  min-width: 100%;
+}
+
+.trackReverse {
+  animation: scroll-reverse 35s linear infinite;
+}
+
+.marqueeWrapper:hover .track,
+.marqueeWrapper:hover .trackReverse {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - 1.5rem)); }
+}
+
+@keyframes scroll-reverse {
+  0% { transform: translateX(calc(-100% - 1.5rem)); }
+  100% { transform: translateX(0); }
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  font-size: 1.1rem;
+  color: var(--text-sheen);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.chip:hover {
+  background: rgba(89, 229, 255, 0.1);
+  border-color: rgba(89, 229, 255, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(89, 229, 255, 0.15);
+  color: #fff;
+}
+
+.chip i {
+  font-size: 1.4rem;
+  color: var(--accent-cyan);
+}
+
+.chip:hover i {
+  color: var(--accent-purple);
+}

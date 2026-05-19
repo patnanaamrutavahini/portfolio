@@ -1,0 +1,132 @@
+.certifications {
+  position: relative;
+  padding: 6rem 4.5rem;
+}
+
+@media (max-width: 768px) {
+  .certifications {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stackContainer {
+  margin-top: 4rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 20vh; /* Extra padding so the stack can fully accumulate before moving on */
+}
+
+.stackedCardWrapper {
+  position: sticky;
+  z-index: 10;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.stackedCard {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 14, 23, 0.8);
+  border: 1px solid rgba(89, 229, 255, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(89, 229, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: top center;
+}
+
+.stackedCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(89, 229, 255, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.iconWrapper {
+  width: 50px;
+  height: 50px;
+  background: rgba(89, 229, 255, 0.1);
+  border: 1px solid rgba(89, 229, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--accent-cyan);
+}
+
+.dateBadge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--text-sheen);
+  font-weight: 600;
+}
+
+.cardBody {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.3;
+}
+
+.issuer {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.cardFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.viewLink {
+  color: var(--accent-cyan);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.3s ease;
+}
+
+.stackedCard:hover .viewLink {
+  gap: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .stackedCard {
+    padding: 1.5rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+}
