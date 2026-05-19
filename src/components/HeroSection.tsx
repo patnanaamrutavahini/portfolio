@@ -4,29 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-const HoverLetter = ({ letter, index, variants }: { letter: string; index: number; variants: any }) => {
-  const colors = ["#5fdbff", "#b76bf0", "#ff60c4", "#3784ff", "#ffbd59", "#50e3c2"];
-  const fonts = [
-    "'Unbounded', sans-serif",
-    "'Syne', sans-serif",
-    "'Space Grotesk', sans-serif",
-    "'Outfit', sans-serif",
-    "'Plus Jakarta Sans', sans-serif"
-  ];
-
-  const [color, setColor] = useState<string>("transparent");
-  const [fontFamily, setFontFamily] = useState<string>(fonts[index % fonts.length]);
-
-  const handleMouseEnter = () => {
-    const availableColors = colors.filter(c => c !== color);
-    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
-    setColor(randomColor);
-
-    const availableFonts = fonts.filter(f => f !== fontFamily);
-    const randomFont = availableFonts[Math.floor(Math.random() * availableFonts.length)];
-    setFontFamily(randomFont);
-  };
-
+const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) => {
   return (
     <motion.span
       variants={variants}
@@ -34,16 +12,9 @@ const HoverLetter = ({ letter, index, variants }: { letter: string; index: numbe
         display: "inline-block",
         whiteSpace: letter === " " ? "pre" : "normal",
         cursor: "default",
-        fontFamily: fontFamily,
-        backgroundImage: color !== "transparent" ? "none" : undefined,
-        WebkitBackgroundClip: color !== "transparent" ? "unset" : undefined,
-        backgroundClip: color !== "transparent" ? "unset" : undefined,
-        WebkitTextFillColor: color !== "transparent" ? color : undefined,
-        color: color !== "transparent" ? color : undefined,
-        transition: "color 0.1s ease, WebkitTextFillColor 0.1s ease, font-family 0.1s ease",
       }}
-      onMouseEnter={handleMouseEnter}
-      whileHover={{ scale: 1.25, y: -8 }}
+      whileHover={{ scale: 1.3, y: -10, zIndex: 10 }}
+      transition={{ type: "spring", stiffness: 400, damping: 15 }}
     >
       {letter}
     </motion.span>
@@ -174,16 +145,18 @@ export default function HeroSection() {
           Entrepreneur • Founder • Human Resources
         </motion.p>
         
-        <motion.h1 
-          className={styles.title} 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {nameArray.map((letter, index) => (
-            <HoverLetter key={index} index={index} letter={letter} variants={letterVariants} />
-          ))}
-        </motion.h1>
+        <div className={styles.nameGlow}>
+          <motion.h1 
+            className={styles.title} 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {nameArray.map((letter, index) => (
+              <HoverLetter key={index} letter={letter} variants={letterVariants} />
+            ))}
+          </motion.h1>
+        </div>
         
         <motion.p 
           className={styles.subtitle}

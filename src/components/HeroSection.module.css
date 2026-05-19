@@ -92,38 +92,82 @@
   margin-bottom: 2rem;
 }
 
+.nameGlow {
+  position: relative;
+  display: inline-block;
+}
+
+.nameGlow::before {
+  content: '';
+  position: absolute;
+  inset: -30px -20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(89, 229, 255, 0.12) 0%,
+    rgba(183, 107, 240, 0.08) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: pulseGlow 3s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes pulseGlow {
+  from { opacity: 0.5; transform: scale(0.95); }
+  to   { opacity: 1;   transform: scale(1.05); }
+}
+
 .title {
-  font-family: 'Unbounded', 'Orbitron', sans-serif;
+  font-family: 'Unbounded', sans-serif;
   font-size: clamp(1.8rem, 3.8vw, 3.8rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.15;
   margin-bottom: 1.5rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  position: relative;
 }
 
 .title span {
   display: inline-block;
-  /* Texture Scrolling Animation */
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  /* Chrome metallic gradient */
   background: linear-gradient(
-    to right,
-    #5fdbff 0%,
-    #b76bf0 25%,
-    #ffffff 50%,
-    #b76bf0 75%,
-    #5fdbff 100%
+    135deg,
+    #c0c0c0 0%,
+    #e8e8e8 15%,
+    #ffffff 25%,
+    #e0e0e0 35%,
+    #9d9d9d 50%,
+    #e8e8e8 65%,
+    #ffffff 75%,
+    #d4d4d4 85%,
+    #c0c0c0 100%
   );
-  background-size: 200% auto;
-  color: transparent;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: textureScroll 5s linear infinite;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: chromeShimmer 4s linear infinite;
+  text-shadow: none;
+  filter: drop-shadow(0 0 12px rgba(200, 220, 255, 0.25));
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes textureScroll {
-  to {
-    background-position: 200% center;
-  }
+.title span:hover {
+  filter:
+    drop-shadow(0 0 16px rgba(89, 229, 255, 0.8))
+    drop-shadow(0 0 32px rgba(183, 107, 240, 0.5));
+  transform: scale(1.25) translateY(-6px);
+  animation-play-state: paused;
+}
+
+@keyframes chromeShimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -100% center; }
 }
 
 .subtitle {
