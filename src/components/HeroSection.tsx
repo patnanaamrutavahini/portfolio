@@ -52,7 +52,7 @@ export default function HeroSection() {
       opacity: 1, 
       scale: 1, 
       filter: "blur(0px)",
-      transition: { type: "spring", stiffness: 150, damping: 15 }
+      transition: { type: "spring" as const, stiffness: 150, damping: 15 }
     }
   };
 
@@ -61,7 +61,7 @@ export default function HeroSection() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { type: "spring", stiffness: 100, damping: 15, delay: 1.5 }
+      transition: { type: "spring" as const, stiffness: 100, damping: 15, delay: 1.5 }
     }
   };
 

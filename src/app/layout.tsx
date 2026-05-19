@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Jami Eswar Anil Kumar | Entrepreneur Portfolio",
   description: "Building human-centered organizations by marrying HR intelligence with AI-driven growth.",
   icons: {
-    icon: "/Profile.jpg"
+    icon: "/Profile.webp"
   }
 };
 

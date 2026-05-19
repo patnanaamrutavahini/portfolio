@@ -22,7 +22,7 @@ const textVariants = {
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { type: "spring", stiffness: 100, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 100, damping: 20 }
   }
 };
 
@@ -31,7 +31,7 @@ const badgeVariants = {
   visible: { 
     opacity: 1, 
     scale: 1,
-    transition: { type: "spring", stiffness: 120, damping: 15 }
+    transition: { type: "spring" as const, stiffness: 120, damping: 15 }
   }
 };
 
@@ -60,7 +60,7 @@ export default function AboutSection() {
             >
               <motion.div style={{ y: imageY, width: "100%", height: "120%", position: "absolute", top: "-10%" }}>
                 <Image 
-                  src="/Profile.jpg" 
+                  src="/Profile.webp" 
                   alt="Portrait of Jami Eswar Anil Kumar" 
                   fill
                   className={styles.image}
